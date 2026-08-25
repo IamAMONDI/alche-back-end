@@ -1,9 +1,6 @@
 #!/usr/bin/python3
-"""Gather an employee's TODO list progress from a REST API."""
-
 import requests
 import sys
-
 
 def main():
     """Display an employee's completed TODO tasks."""
@@ -33,7 +30,5 @@ def main():
 
     for task in completed_tasks:
         print("\t {}".format(task.get("title")))
-
-
-if __name__ == "__main__":
-    main()
+        
+if __name__ == "__main__": main()
