@@ -10,30 +10,24 @@ def main():
     """Display an employee's completed TODO tasks."""
     employee_id = int(sys.argv[1])
 
-    user_url = (
-        "https://jsonplaceholder.typicode.com/users/{}"
-        .format(employee_id)
-    )
+    user_url = f"https://jsonplaceholder.typicode.com/users/{employee_id}"
     todos_url = (
-        "https://jsonplaceholder.typicode.com/users/{}/todos"
-        .format(employee_id)
+        f"https://jsonplaceholder.typicode.com/users/{employee_id}/todos"
     )
 
     user = json.loads(urlopen(user_url).read().decode("utf-8"))
     todos = json.loads(urlopen(todos_url).read().decode("utf-8"))
 
     employee_name = user.get("name")
-    completed_tasks = [
-        task for task in todos if task.get("completed")
-    ]
+    completed_tasks = [task for task in todos if task.get("completed")]
 
     print(
-        "Employee {} is done with tasks({}/{}):"
-        .format(employee_name, len(completed_tasks), len(todos))
+        f"Employee {employee_name} is done with tasks("
+        f"{len(completed_tasks)}/{len(todos)}):"
     )
 
     for task in completed_tasks:
-        print("\t {}".format(task.get("title")))
+        print(f"\t {task.get('title')}")
 
 
 if __name__ == "__main__":
