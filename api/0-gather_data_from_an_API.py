@@ -1,6 +1,10 @@
 #!/usr/bin/python3
-import requests
+"""Gather an employee's TODO list progress from a REST API."""
+
+import json
 import sys
+from urllib.request import urlopen
+
 
 def main():
     """Display an employee's completed TODO tasks."""
@@ -15,8 +19,8 @@ def main():
         .format(employee_id)
     )
 
-    user = requests.get(user_url).json()
-    todos = requests.get(todos_url).json()
+    user = json.loads(urlopen(user_url).read().decode("utf-8"))
+    todos = json.loads(urlopen(todos_url).read().decode("utf-8"))
 
     employee_name = user.get("name")
     completed_tasks = [
@@ -30,5 +34,7 @@ def main():
 
     for task in completed_tasks:
         print("\t {}".format(task.get("title")))
-        
-if __name__ == "__main__": main()
+
+
+if __name__ == "__main__":
+    main()
